@@ -1,0 +1,150 @@
+
+% ----------------------------------------------------------
+% University of Central Lancashire - Final Year Project Proposal
+% Professional LaTeX Template
+% ----------------------------------------------------------
+\documentclass[12pt,a4paper]{article}
+
+% --- Packages ---
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+\usepackage[a4paper,margin=2.5cm]{geometry}
+\usepackage{setspace}
+\usepackage{graphicx}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{csquotes}
+\usepackage{biblatex}
+
+% --- Setup bibliography ---
+\addbibresource{references.bib}
+
+% --- Page Style ---
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{University of Central Lancashire}
+\lhead{Final Year Project Proposal}
+\cfoot{\thepage}
+
+% --- Title Formatting ---
+\titleformat{\section}
+{\normalfont\Large\bfseries}
+{\thesection}{1em}{}
+
+\titleformat{\subsection}
+{\normalfont\bfseries}
+{\thesubsection}{1em}{}
+
+% --- Line Spacing ---
+\onehalfspacing
+
+% --- Hyperlink setup ---
+\hypersetup{
+	colorlinks=true,
+	linkcolor=black,
+	urlcolor=black,
+	citecolor=black
+}
+
+% --- Title Page ---
+\begin{document}
+	
+	\begin{titlepage}
+		\centering
+		\vspace*{2cm}
+		% --- University Logo Placeholder ---
+		\includegraphics[width=8cm]{uclan-logo-placeholder.png}\\[1cm]
+		
+		{\Huge \bfseries Artificial Intelligence}\\
+		{\large Assessment 1}\\[0.25cm]
+		\vspace*{2cm}
+		{\Huge \bfseries Facial Emotion Recognition using ML}\\
+		
+		\large \textbf{Sarah Gosch}\\[2cm]
+		
+		{\large BSc (Hons) Software Engineering}\\[0.25cm]
+		{\large School of Engineering and Computing}\\[0.25cm]
+		{\large University of Central Lancashire}\\[1.5cm]
+		
+		{\large \today}
+		
+		\vfill
+	\end{titlepage}
+	
+	% --- Table of Contents ---
+	\tableofcontents
+	\newpage
+	
+	% --- Sections ---
+\section{Introduction}
+Facial emotion recognition (FER) is the process of detecting and classifying emotions from human facial expressions. 
+It is a crucial aspect of human–computer interaction, enabling systems to interpret non-verbal cues. 
+This project implements a traditional machine learning approach using Support Vector Machines (SVM), 
+K-Nearest Neighbours (KNN), and Decision Trees to classify basic emotions such as \textit{Neutral, Angry, Happy, Surprise, Sad, and Fear}. 
+Two datasets, JAFFE and Cohn–Kanade (CK+), are used for evaluation.
+
+\section{Literature Review}
+
+
+\section{Datasets}
+\subsection{JAFFE Dataset}
+Contains 213 grayscale images from 10 female subjects expressing 7 emotions. 
+Resolution: 256×256 pixels. 
+
+\subsection{CK+ Dataset}
+The CK+ dataset includes 593 sequences from 123 subjects. 
+The last frame of each sequence is used for classification.
+
+\subsection{Preprocessing}
+Faces were detected and cropped using OpenCV’s Haar Cascade. 
+All images were resized to 100×100 pixels and normalized. 
+To address class imbalance, SMOTE oversampling was applied.
+
+\section{Model Development}
+\subsection{Feature Extraction}
+Two hand-crafted methods were used:
+\begin{itemize}
+	\item \textbf{HOG:} Captures edge orientation patterns.
+	\item \textbf{LBP:} Encodes local binary texture features.
+\end{itemize}
+
+Dimensionality reduction using PCA retained 95\% variance.
+
+\subsection{Classifiers}
+Four models were trained:
+\begin{itemize}
+	\item SVM (RBF kernel)
+	\item KNN (k=5)
+	\item Decision Tree
+	\item Naive Bayes
+\end{itemize}
+
+A 5-fold cross-validation approach was used for hyperparameter tuning.
+
+\section{Model Evaluation}
+\subsection{Metrics}
+Models were evaluated using accuracy, F1-score, and confusion matrices.
+
+\subsection{Results}
+
+
+\subsection{Discussion}
+SVM achieved the best performance overall. 
+LBP features were more effective for JAFFE, while HOG performed better on CK+ due to varied lighting and subject diversity. 
+Most confusion occurred between \textit{Neutral} and \textit{Sad} classes.
+
+\section{Conclusion}
+The experiment demonstrated that classical ML techniques can effectively classify emotions in facial images. 
+SVM with HOG or LBP features achieved accuracies above 85\%. 
+Future work may integrate temporal information from videos and explore hybrid (shallow+deep) models.
+
+\section*{Supplementary Material}
+Source code and data preprocessing scripts:  
+
+\url{https://github.com/yourusername/facial-emotion-ml}
+
+	
+\end{document}
