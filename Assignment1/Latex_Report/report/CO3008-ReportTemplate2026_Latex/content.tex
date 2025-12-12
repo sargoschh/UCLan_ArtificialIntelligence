@@ -1,108 +1,198 @@
-% Main Content Chapters
-
 %========================================
 % CHAPTER 1: INTRODUCTION
 %========================================
 \chapter{Introduction}
 
-Introduction (10\%): Describe the problem you are working on, and an overview of your results
+Facial expressions are an important part of non-verbal human communication. Through them it is possible to understand the emotional states of humans, like anger, happiness, and fear, among others (Figure \ref{fig:emotions}). The ability to automatically classify these basic facial expressions or emotions is considered the basic problem this project tries to solve. Its development has great potential for a wide range of applications, for example human-computer interaction or mental diagnostics.
 
+This project proposes the development and evaluation of a machine learning-based model for facial emotion recognition. The approach focuses on the application of traditional machine learning methods, specifically support vector machine (SVM), decision tree (DT), K-nearest neighbor (KNN), and random forest (RF) classifiers, with the support of the Stacking ensemble approach. More importantly, a combination of local binary patterns (LBP) and Histogram of Oriented Gradients (HOG) as the feature extraction techniques to capture both the texture and shape information from facial images are used.
+\newline
 
+\section{Overview of Results}
+
+The model evaluation showed that overall, the SVM classifier performed best on the test set. The key metrics demonstrate that the SVM achieved an Accuracy of 73.8\%, an MCC of 68.3\%, and an F1 of 73.0\% on the test data. These, combined with a detailed confusion matrix analysis presented in Figure \ref{fig:confusionMatrix}, showed the effectiveness of the combined LBP and HOG feature set when coupled with a robust classifier such as SVM for this classification task.
+\newline
 
 %========================================
 % CHAPTER 2: STATE OF THE ART
 %========================================
 \chapter{Literature review}
 
- 
-Literature review (10\%): Discuss published work that relates to this project. How is your approach similar or different from others?
+The Development of facial Emotion Recognition (FER) has been an area where an significant amount of research has been done. A lot of these researches are about conventional machine learning models, such as Support Vector Machine (SVM), along with feature engineering.
 
+An example of SVM as a robust detection tool for classifying data into two classes (smile vs. no smile) in facial images derived from video data, has been established by \citep{Abdul-Hadi2020}. Their pre-processing techniques involved simple gray scaling and Histogram of Oriented Gradients (HOG). This confirms that HOG remains a valid and fundamental feature extraction technique for facial analysis. This project, however, expands this by detecting a total of six fundamental facial emotions along with HOG and LBP techniques.
+
+Focusing on practical application, the paper published by \citep{Sun2008} provides a application of FER for students' engagement analysis. The authors were able to obtain a total recognition rate of 84.55\% using Active Appearance Models for their feature extraction and One-Against-One SVM for their evaluation of emotion. This paper directly relates to the project in proving that SVM has been successful in practical emotion evaluation tasks, justifying the projects approach of relying on traditional techniques.
+
+The most important part of feature engineering has been explained by \citep{Sastriana2024}. The authors in this research, working on the CK+ facial expression database, proved that classification performed using LBP features alone resulted in low accuracy (less than 50\%) and HOG alone resulted only in results in the low 70\% range. However, their proposed method, which combines HOG, LBP, and DWT features using a soft-voting strategy (late fusion), effectively increased their recognition value to over 90\%. This experiment clearly supports the choice in this project to use a combined feature extraction (combining LBP and HOG features), since using either of them alone has a limitation in this research. Moreover, a detailed analysis of LBP features in a facial expression recognition perspective, \citep{Shan2009} brought out that using LBP alone in certain facial expression recognition tasks often brings down their performance values due to challenges in detection some emotions, like as Anger, Fear, and Sadness. This justifies the choice of using LBP features in combination with a structural feature extraction technique like HOG.
+
+When classifying these categories, it was found that the performance of the ML model is strongly influenced by the size of the data used and the complexity of the features. In the paper published by \citep{Sharma2023}, a classification with different models has been described with overall high accuracies for SVM, KNN, and RF of over 90\%. However, it has been explained that though KNN provides a high accuracy, it´s efficiency and speed both decrease with increasing data size. SVM provides a good performance for small data, but \citep{Siam2022} point out that it faces performance issues when data size becomes larger than the number of features in a data point. Random Forrest provides a good performance for large data sets, but for a larger number of trees, performance can decrease. The authors of ‘Deploying Machine Learning Techniques for Human Emotion Detection’ \citep{Siam2022} compare various machine learning models (decision tree, random forest, SVM, KNN and others). For CK+, KNN and SVM offer the highest accuracy at around 97\% and 94\%, while for JAFFE datasets, KNN offers the highest accuracy at around 95\%. These observations enabled this project to focus on multiple classifiers. Ultimately, the SVM model was chosen because it achieved the best results.
+
+Approaches that use ensemble techniques offer a way to further improve classification performance. This has proven successful in the papers of \citep{Xie2018} and \citep{Ma2024} as demonstrated by the successful application of stacking ML models. These studies provided this project with initial considerations on how a stacking ensemble method can be applied by integrating KNN, DT and RF to leverage their individual strengths, although the hybrid model was outperformed by the finely tuned SVM.
+\newline
 
 %========================================
 % CHAPTER 3: METHODOLOGY
 %========================================
 \chapter{Datasets}
 
-Datasets (10\%): Describe the data you are working with for your project. What type of data is it? Where did it come from? How much data are you working with? Did you have to do any preprocessing, filtering, or other special treatment to use this data in your project? If you are collecting new data, how will you do it and incorporate it into your model?
+Any classification model's performance is fundamentally linked to the quality and characteristics of the data used to train and test the model.
+\newline
 
-\section{Another Example Section}
+\section{Data Description and Source}
 
-\hl{As an example of a figure, consider Figure~}\ref{fig:technical}.
+The project uses images from two major, publicly available facial expression databases:
 
-\hl{Each figure is numbered automatically, and it is good academic writing to cite the figure in the body of your text (e.g. "see Figure~}\ref{fig:technical}\hl{", or "Figure~}\ref{fig:technical}\hl{ illustrates a highly technical diagram").}
+\begin{itemize}
+	\item The JAFFE (Japanese Female Facial Expression) Database is the collection of images of 10 Japanese female models posing for the six basic facial expressions (Angry, Disgust, Fear, Happy, Sad, Surprise) and Neutral. It's a controlled high-quality dataset.
+	\item The Cohn-Kanade (CK+) Database is one of the most frequently used databases for facial emotion recognition. It contains a larger number of subjects and provides sequences of facial expressions (Action Units) for  rich data analysis.
+\end{itemize}
 
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=0.8\textwidth]{figures/highly-technical-diagram.png}
-    \caption{Highly Technical Diagram}
-    \label{fig:technical}
-\end{figure}
+\section{Data Size and Preprocessing}
+
+The combination of the JAFFE and CK+ datasets was important to provide a greater and more diverse sample set, thereby enhancing the generalization capability of the model.
+\newline
+
+\subsection{Preprocessing and Special Treatment}
+
+For pre-feature extraction, each image required face detection to focus on the face region, followed by face alignment (e.g., aligning based on eye positions) so that the faces in all images would be oriented and scaled similarly. This reduces any variations due to pose or scale.
+
+Color images are converted to grayscale, since LBP and HOG features normally use single-channel images for feature extraction. This reduces computational complexity.
+
+Most of the expression datasets suffer from class imbalance, where some emotions (e.g., Neutral or Happy) have far more samples than others (e.g., Fear or Surprise). For this project, data augmentation techniques were used, like flipping or rotations, in order to synthetically increase their representation for better model training.
+The function for pre-processing can be found in Listing \ref{PreprocessingFunction}.
+\newline
 
 %========================================
 % CHAPTER 4: DESIGN
 %========================================
 \chapter{Model Development}
 
- 
-Model Development (30\%): What method or algorithm are you proposing/using? 
-Discuss your approach for solving the given problems. Why is your approach the right thing to do? Did you consider alternative approaches? If you are using any existing implementations, how will you use them and justify the reason for using it to solve the given problem? How have you planned to improve or modify such implementations? 
-Explain the inner workings of your developed/used model and justify why and how the model works to solve the given problem. You should demonstrate that you have applied ideas and skills built up during the semester to tackling the given problem. It may be helpful to include figures, diagrams, or tables to describe your method.
+The following chapter will explain the implementation process of the facial expression recognition model.
+\newline
+
+\section{Feature Extraction: Combining LBP and HOG}
+
+The first and most important step of the model development was to convert the raw image data into a robust feature vector. For this purpose, a hybrid approach by fusing two of the most powerful conventional feature descriptors were applied: Local Binary Patterns and Histogram of Oriented Gradients.
+
+LBP (Local Binary Patterns) is a computationally efficient texture operator describing the relationship between a given central pixel and its neighbors. They are especially effective in capturing micro-patterns, slight texture changes on the face, such as wrinkles and roughness, which are crucial for classifying emotions.
+
+HOG (Histogram of Oriented Gradients) calculates the distribution of intensity gradients to capture structural and boundary information of the face. This feature set is superior in describing the shape of facial components that define an emotion, such as shape of the mouth or the brow, or widening of the eyes.
+
+Both the LBP features extracted and the HOG features were combined by concatenation to form the final feature vector used for the training of all classifiers. This strategy combines the complementary strengths of both methods and allows a richer representation that covers both the fine-grained texture and global shape of the facial expression. A listing as well as a visualization of both methods can be found in Listing \ref{LBP_HOG} and Figure \ref{fig:featureExtraction}.
+\newline
+
+\section{Classifier Implementation and Selection}
+
+A collection of traditional machine learning classifiers were implemented and evaluated, all of which were trained on the combined LBP/HOG feature vector.
+
+\begin{itemize}
+	\item \textbf{K-Nearest Neighbors (KNN)}: KNN classifies a data point by determining the majority class of its k closest neighboring data points in the feature space.
+	\item \textbf{Decision Tree (DT)}: A tree-based model serving as a baseline for interpretability.
+	\item \textbf{Random Forest (RF)}: This is an ensemble method combining multiple Decision Trees to reduce the risk of overfitting in single DT´s.
+	\item \textbf{Support Vector Machine (SVM)}: The chosen final classifier because of its superior performance as will be shown below.
+	\item \textbf{Stacking Ensemble Classifier}: The stacking ensemble classifier is an advanced ensemble classification method that combines predictions of multiple base models.
+\end{itemize}
+
+
+\section{Detailed SVM Implementation and Parameter Tuning}
+
+The best performance was found by the Support Vector Machine model, and therefore this model was chosen for final validation and prediction. It was implemented using a scikit-learn pipeline, which is necessary to ensure that pre-processing steps are uniformly applied to both the training and test data.
+\newline
+
+\subsection{SVM Pipeline Construction}
+
+The pipeline (as shown in Listing \ref{SVM_Training}) consists of three key steps applied one after the other to the concatenated LBP/HOG feature data.
+
+The features were standardized with a StandardScaler before being fed into the classifier. This scales the data so that it has a mean of zero and a standard deviation of one, preventing features with larger initial values from influencing the model's objective function.
+
+Due to the high dimensionality of the combined LBP/HOG feature vector, Principal Component Analysis (PCA) was utilized with 40 components. This step minimizes noise and reduces the risk of overfitting while retaining the most informative variance within the dataset.
+
+The core classifier was set up using the One-vs-Rest (one class is fitted against all the other classes) strategy for the six-class problem.
+
+\subsection{Hyperparameter Justification}
+
+The performance of the SVM Pipeline is highly dependent on some key hyperparameters, especially the Kernel, the Regularization Parameter 'C', and the Kernel Coefficient 'gamma'.
+
+First, tuning by GridSearchCV on a large parameter space was tested. However, this always converged to an overfitting model that had high training accuracy but very poor generalization on the unseen test set. It seemed that a simpler approach was required in order to stop the model from getting overly specific about the training data.
+
+As a result, the approach of tuning by GridSearchCV was abandoned and a more iterative, manual tuning process was used. This required manually testing different combinations of the parameters for C, gamma, the kernel, and the PCA features until a balanced model, that performed well on both training and test sets, was found. The final selected parameters are:
+
+\begin{itemize}
+	\item $kernel = "rbf"$
+	\item $C = 0.25$
+	\item $gamma = "scale"$
+\end{itemize}
+
+With these parameters a good balance between training and testing performance was created.
+\newline
+
+\section{Ensemble Implementation: Stacking}
+
+In order to see if the combination of weaker or diverse base model predictions outperformed the single best model, a Stacking Classifier was implemented.
+
+The ensemble for the base model was developed through combining the K-Nearest Neighbors (KNN), Decision Tree (DT), and Random Forest (RF) models.
+The outputs or predictions of the three base models served as input features for a Logistic Regression classifier. The meta-classifier learns the optimal way to combine or "stack" the predictions coming from the base models to come up with the final, definitive classification. Although the Stacking model performed very well, with a Test Accuracy of 61.0\%, the SVM pipeline ultimately gave the best performance, validating the robustness of the combined LBP/HOG features when paired with a strong non-linear boundary mechanism.
+\newline
 
 %========================================
 % CHAPTER 5: IMPLEMENTATION
 %========================================
 \chapter{Model Evaluation}
 
- 
-Model Evaluation (30\%): How will you evaluate your results? Discuss the results obtained from your model. Qualitatively, what kind of results do you expect (e.g., plots or figures)? Quantitatively, what kind of analysis will you use to evaluate and/or compare your results (e.g., what performance metrics or statistical tests)? Discuss the experiments that you performed to demonstrate that your approach solves the problem. You might compare with previously published methods, perform an ablation study to determine the impact of various components of your system, experiment with different hyperparameters or architectural choices, use visualization techniques to gain insight into how your model works, discuss common failure modes of your model, etc. You should include graphs, tables, or other figures to illustrate your experimental results.
+Model evaluation is important for quantifying the effectiveness of the implemented approach. The evaluation consisted of training and validation using cross-validation on the combined dataset, followed by an evaluation on a created test set.
+\newline
 
-\begin{lstlisting}[language=C++, caption=Example Code]
-using System;
+\section{Quantitative Evaluation Metrics}
 
-namespace HiWorld
-{
-    internal static class Program
-    {
-        private static void Main(string[] args)
-        {
-            Console.WriteLine("Hello World!");
-        }
-    }
-}
-\end{lstlisting}
-
-\begin{longtable}[!h]{c||c|c|c}  %[!h] steht für here, damit Tabelle an dieser Stelle eingefügt wird, ! für erzwungen
-	\hline
-	\textbf{Test ID} & \textbf{Description} & \textbf{Expected} & \textbf{Result} \\ %\textbf macht die Elemente fettgeschrieben
-	\hline
-	\hline
-	 &  &  &  \\
-	\hline
-	 &  &  &  \\
-	\hline
-	 &  &  &  \\
-	\hline
-	 &  &  &  \\
-	\hline
-	\caption{Testing Summary}
-	\label{tbl:testing}
-\end{longtable} 
-
-\hl{Example for List:}
+The performance was assessed using several metrics, which are essential for evaluating a multi-class classification problem, especially with potential class imbalance:
 
 \begin{itemize}
-	\item Point 1
-	\item Point 2
-	\item Point 3
+	\item \textbf{Accuracy}: The percentage of correctly predicted classes.
+	\item \textbf{F1 Score}: The harmonic mean of precision and recall. It is a better measure than accuracy when dealing with class imbalance.
+	\item \textbf{Matthews Correlation Coefficient (MCC)}: A highly reliable statistical measure for binary and multi-class classification. It produces a high score only if the prediction has good results in all four categories of the confusion matrix (true positives, false negatives, true negatives, and false positives), proportionally to the size of the positive and negative classes.
 \end{itemize}
 
+\section{Performance Results and Comparison}
 
+The table shown in Appendix \ref{tbl:testing} summarizes the performance of all models on both the training and test sets.
+
+Among all test metrics, the best overall performance was achieved by the SVM model, which showed a better generalization from the training data. Therefore, the choice of SVM for the final analysis of the test images is justified. High training accuracy for SVM suggests that it effectively learnt the complex boundaries in the feature space. The difference between training and test accuracy can therefore be considered as acceptable generalization.
+\newline
+
+\section{Qualitative Evaluation: Confusion Matrix and Visual Results}
+
+The Confusion Matrix for the best-performing model, SVM, is provided in the appendix (Figure \ref{fig:confusionMatrix}).
+
+The diagonal values (e.g., 39 for Angry, 81 for Happy, 76 for Surprise) show the number of correctly classified instances for each emotion.
+
+The matrix allows to easily identify the performance for predicting the classes. For instance, a significant number of Sadness true emotions were incorrectly predicted as Angry (4 instances) or Neutral (10 instances). Similarly, Fear was often confused with Neutral (9 instances) and Sadness (5 instances). This confusion between related negative emotions shows the challenge of subtle facial differences in the dataset.
+\newline
+
+\subsection{Visual Classification}
+
+In order to provide qualitative proof of how the model operates, face classification visual examples are included in the appendix - Figures \ref{fig:predictionFear} to \ref{fig:predictionSad}. These figures show correct and incorrect predictions:
+
+\begin{itemize}
+	\item \textbf{Correct Classifications}: Examples of correctly predicted Fear (Figure \ref{fig:predictionFear}), Happy (Figure \ref{fig:predictionHappy}), Neutral (Figure \ref{fig:predictionNeutral}) and Surprise (Figure \ref{fig:predictionSurprise}) demonstrate the model's capability to correctly map LBP/HOG features to the correct emotion label.
+	\item \textbf{Wrong Classifications}: Figure \ref{fig:predictedAnger} is an example where the true emotion was Sadness but was wrongly predicted as Angry. Figure \ref{fig:predictionSad} shows an image with the true emotion Anger wrongly predicted as Sadness. These errors align with the confusion observed in the matrix, where the model struggles to distinguish between specific negative emotions.
+\end{itemize}
 
 %========================================
 % CHAPTER 6: EVALUATION, DISCUSSION AND CONCLUSIONS
 %========================================
 \chapter{Conclusions}
 
- 
-Conclusion (10\%): Summarize your key results - what have you learned? Suggest ideas for future extensions or new applications of your ideas.
+This project successfully developed a facial emotion recognition model using a combined feature extraction approach on the JAFFE and CK+ datasets. The main finding is the overall good performance of the Support Vector Machine (SVM) classifier, achieving the highest test accuracy of 73.8\% coupled with the combined LBP and HOG features. The overall performance evaluation of KNN, DT, RF, and the Stacking ensemble provided important insights into the performance characteristics of alternative classical Machine Learning techniques for this classification task. The findings confirmed that SVM was able to model the nonlinear relationship of the detailed facial features to the six basic emotion classes most robustly.
+\newline
 
+\section{Future Extensions}
+
+Based on the challenges seen during development, particularly the confusion between similar negative emotions (such as Sadness, Fear and Anger), several key areas could be pursued for future work in order to advance the model performance. For example using Datasets which include more expression data from a greater variety of demographics. This would help to increase the generalization capability of the model. 
+For performance improvements, the project could be extended to use deep learning models, such as Convolutional Neural Networks (CNNs). Although out of the scope of this traditional machine learning assignment, CNNs are known for their ability to automatically learn highly abstract and robust features directly from raw image pixels, which often results in state-of-the-art results in Facial Emotion Recognition.
+
+\textbf{Link to the code:}
+
+https://github.com/sargoschh/UCLan\_ArtificialIntelligence/blob/main/Assignment1/Assign
+ment\_PredictionWithStacking.ipynb
+\newline

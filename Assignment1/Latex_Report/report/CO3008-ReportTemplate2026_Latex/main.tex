@@ -23,21 +23,21 @@
 %\usepackage[backend=biber,style=apa]{biblatex}
 \usepackage[round, authoryear]{natbib}
 \setlength{\parindent}{0pt}  % Remove all paragraph indentation
-\setlength{\parskip}{1em}     % Add space between paragraphs instead
+\setlength{\parskip}{0.8em}     % Add space between paragraphs instead
 
 %========================================
 % PAGE LAYOUT
 %========================================
 \geometry{
     a4paper,
-    left=2.5cm,
-    right=2.5cm,
-    top=2.5cm,
-    bottom=2.5cm
+    left=2.0cm,
+    right=2.0cm,
+    top=2.0cm,
+    bottom=2.0cm
 }
 
 % Line spacing
-\setstretch{1.5}
+\setstretch{1.2}
 
 %========================================
 % FONTS (Approximating Avenir Next with similar sans-serif)
@@ -66,7 +66,7 @@
 % Chapter formatting (Heading 1)
 \titleformat{\chapter}[display]
 {\normalfont\huge\bfseries}{}{0pt}{\Huge}
-\titlespacing*{\chapter}{0pt}{-60pt}{10pt}
+\titlespacing*{\chapter}{0pt}{-2cm}{10pt}
 
 % Section formatting (Heading 2)
 \titleformat{\section}
@@ -77,6 +77,11 @@
 \titleformat{\subsection}
     {\normalfont\large\bfseries}{\thesubsection}{1em}{}
 \titlespacing*{\subsection}{0pt}{0pt}{0pt}
+
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd{\chapter}{\if@openright\cleardoublepage\else\clearpage\fi}{}{}{}
+\makeatother
 
 %========================================
 % UNNUMBERED CHAPTERS
@@ -182,6 +187,7 @@
 %\printbibliography[heading=none]
 \addcontentsline{toc}{chapter}{References}
 \bibliography{references.bib}
+\newpage
 
 % Appendices
 \appendix

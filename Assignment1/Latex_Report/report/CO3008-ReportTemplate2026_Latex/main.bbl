@@ -1,5 +1,64 @@
 \begin{thebibliography}{xx}
 
+\harvarditem{Abdul-Hadi \harvardand\ Waleed}{2020}{Abdul-Hadi2020}
+Abdul-Hadi, M.~H. \harvardand\ Waleed, J.  \harvardyearleft
+  2020\harvardyearright , `Human speech and facial emotion recognition
+  technique using svm', {\em Proceedings of the 2020 International Conference
+  on Computer Science and Software Engineering, CSASE 2020} pp.~191--196.
+\newline\harvardurl{https://ieeexplore.ieee.org/document/9142065}
 
+\harvarditem{Ma \harvardand\ Dam}{2024}{Ma2024}
+Ma, T.~C. \harvardand\ Dam, A.~D.  \harvardyearleft 2024\harvardyearright ,
+  `Enhancing emotion recognition with stacked machine learning models: Insights
+  from a novel vietnamese facial expression dataset', {\em ACM International
+  Conference Proceeding Series} pp.~1--6.
+\newline\harvardurl{https://dl.acm.org/doi/pdf/10.1145/3654522.3654523}
+
+\harvarditem[Sastriana et~al.]{Sastriana, Prasetyo \harvardand\
+  Purwanto}{2024}{Sastriana2024}
+Sastriana, W.~F., Prasetyo, S.~Y. \harvardand\ Purwanto, E.~S.
+  \harvardyearleft 2024\harvardyearright , `Late fusion approach for facial
+  expression recognition using hog, lbp, and dwt features with svm', {\em 2024
+  Beyond Technology Summit on Informatics International Conference, BTS-I2C
+  2024} pp.~653--658.
+\newline\harvardurl{https://ieeexplore.ieee.org/document/10941791}
+
+\harvarditem[Shan et~al.]{Shan, Gong \harvardand\ McOwan}{2009}{Shan2009}
+Shan, C., Gong, S. \harvardand\ McOwan, P.~W.  \harvardyearleft
+  2009\harvardyearright , `Facial expression recognition based on local binary
+  patterns: A comprehensive study', {\em Image and Vision Computing} {\bf
+  27},~803--816.
+\newline\harvardurl{https://www.sciencedirect.com/science/article/pii/S0262885608001844?casa\_token
+  =VHSaaweYLaIAAAAA:bBqHg3sfi9YnSB6ZyKJ8FREOZiO63qUJ\_Q5OH3Qutc2BGvEqz1RVx63
+  e7AideGkyCCcAtiPZnA}
+
+\harvarditem[Sharma et~al.]{Sharma, Bajaj \harvardand\ Arora}{2023}{Sharma2023}
+Sharma, A., Bajaj, V. \harvardand\ Arora, J.  \harvardyearleft
+  2023\harvardyearright , `Machine learning techniques for real-time emotion
+  detection from facial expressions', {\em 2nd Edition of IEEE Delhi Section
+  Owned Conference, DELCON 2023 - Proceedings} .
+\newline\harvardurl{https://ieeexplore.ieee.org/document/10127369}
+
+\harvarditem[Siam et~al.]{Siam, Soliman, Algarni, El-Samie \harvardand\
+  Sedik}{2022}{Siam2022}
+Siam, A.~I., Soliman, N.~F., Algarni, A.~D., El-Samie, F. E.~A. \harvardand\
+  Sedik, A.  \harvardyearleft 2022\harvardyearright , `Deploying machine
+  learning techniques for human emotion detection', {\em Computational
+  Intelligence and Neuroscience} {\bf 2022},~8032673.
+\newline\harvardurl{https://onlinelibrary.wiley.com/doi/full/10.1155/2022/8032673}
+
+\harvarditem[Sun et~al.]{Sun, Pei \harvardand\ Zhou}{2008}{Sun2008}
+Sun, J.~M., Pei, X.~S. \harvardand\ Zhou, S.~S.  \harvardyearleft
+  2008\harvardyearright , `Facial emotion recognition in modern distant
+  education system using svm', {\em Proceedings of the 7th International
+  Conference on Machine Learning and Cybernetics, ICMLC} {\bf 6},~3545--3548.
+\newline\harvardurl{https://ieeexplore.ieee.org/document/4621018}
+
+\harvarditem[Xie et~al.]{Xie, Liu \harvardand\ Ding}{2018}{Xie2018}
+Xie, O., Liu, Z.~T. \harvardand\ Ding, X.~W.  \harvardyearleft
+  2018\harvardyearright , `Electroencephalogram emotion recognition based on a
+  stacking classification model', {\em Chinese Control Conference, CCC} {\bf
+  2018-July},~5544--5548.
+\newline\harvardurl{https://ieeexplore.ieee.org/document/8483496}
 
 \end{thebibliography}
