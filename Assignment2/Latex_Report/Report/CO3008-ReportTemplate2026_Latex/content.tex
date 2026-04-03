@@ -1,0 +1,146 @@
+%========================================
+% CHAPTER 1: INTRODUCTION
+%========================================
+\chapter{Introduction}
+
+ 
+Facial emotion recognition (FER) is a field of artificial intelligence that focuses on identifying human emotional states based on facial features. FER systems use information from facial muscle movements or features to classify facial expressions into emotional states. FER is becoming more important in various fields. For example, in medicine to evaluate patients’ mental states, in vehicle safety to detect driver fatigue, or in human-computer interaction (HCI) to develop more intuitive interfaces.                
+
+Traditional machine learning (ML) approaches, such as support vector machines (SVM) or random forests, often struggle to handle the subtle differences in facial features. When implementing traditional ML approaches in the past, algorithms such as SVM or Random Forest usually failed to achieve high accuracy in facial recognition systems. This was due, among other things, to the fact that traditional ML approaches rely on feature extraction. This is a process that is sensitive to changes in lighting conditions, head positions, and background noise.
+
+The main objective of the project was to develop a system for recognizing facial expressions using deep learning (DL) approaches such as EfficientNet-B0, ResNet18, and VGG16. In addition, the project aims to minimize image preprocessing by using a facial recognition system based on Haar cascade classifiers.
+\newline
+
+%========================================
+% CHAPTER 2: STATE OF THE ART
+%========================================
+\chapter{Literature review}
+
+Recent studies on facial emotion recognition (FER) have shifted from hand-crafted approaches toward deep learning. In the article \citep{Sankaradass2024}, EfficientNet is used to achieve high accuracy while maintaining efficiency. In another article by \citep{Akhand2021}, transfer learning is used for fast training with pre-trained models such as ResNet and VGG. In a paper of \citep{DeepaPaikar2023} it is found that transfer learning is superior to training from scratch, although accuracy suffers with a smaller number of epochs.
+
+However, these approaches also come with challenges. The models presented in \citep{Dong2021} face the challenge of high computational complexity. The research presented in \citep{Agung2024} and \citep{Gautam2023} has shown that some feature extraction approaches face problems such as data imbalances or changes in environmental conditions. The approaches presented in \citep{Singh2023} face the challenge of high computational costs.
+\newline
+
+\section{Similarities and differences}
+Similar to the literature reviewed, this project also uses EfficientNet, ResNet, and VGG with transfer learning. However, unlike most existing solutions, which rely exclusively on automated data extraction, the proposed solution focuses on the problem of overfitting and background noise by employing Haar cascade face recognition to isolate features. Furthermore, the proposed project used class-weighted calculations to correctly handle minority emotion classes.                                                                       
+\newline
+
+%========================================
+% CHAPTER 3: METHODOLOGY
+%========================================
+\chapter{Datasets}
+	
+As part of the project, three datasets were used to train and test the models for facial expression recognition. These datasets were FER-2013, CK+ and JAFFE.
+\newline
+
+\section{Data sources and scope}
+
+\begin{itemize}
+	\item \textbf{FER-2013}: The dataset was downloaded from Kaggle. This was the primary dataset used. The images were in greyscale format and had a size of 48 × 48 pixels. The training set consisted of 27,673 images across six classes: happy (7,215), neutral (4,965), sad (4,830), fearful (4,097), angry (3,995) and surprised (3,171). The dataset was subsequently tested using a separate set of 7,067 images.
+	\item \textbf{CK+ and JAFFE}: The datasets were used for general evaluation. The CK+ test-dataset contained 97 images and the JAFFE test-dataset contained 184 images for evaluation process.
+\end{itemize}
+
+\section{Pre-processing and Data Augmentation}
+
+To localise the faces in the images, standardization was carried out using the Haar-cascade-classifier. The faces were then cropped and resized to 224 × 224 pixels to meet the requirements of the selected deep learning models. To address the issue of class imbalance and prevent overfitting of the models, the following data augmentations were applied to the training data: random flipping, rotation (10° \& 20°), colour jitter (0.2) and normalization.
+\newline
+
+%========================================
+% CHAPTER 4: DESIGN
+%========================================
+\chapter{Model Development}
+
+The aim of this project was to develop an efficient facial expression recognition (FER) system that could be applied to different individuals and lighting conditions. To this end, three types of deep neural networks were used. The models used were EfficientNet-B0, ResNet18 and VGG16.
+EfficientNet-B0 and ResNet18 were selected to use the pre-trained weights of these models, which were trained on the ImageNet dataset. EfficientNet-B0 was selected for it's ability to achieve high accuracy with fewer parameters. ResNet18 was selected for it's residual connection. This helps to prevent the vanishing gradient problem. VGG16 was used to compare modern models with an older CNN model.
+\newline
+
+\section{Initial Training and Overfitting Analysis}
+
+First, both the EfficientNet-B0 and ResNet18 models were trained using standard preprocessing (i.e., simple resizing). However, the training results showed signs of a significant overfitting problem, as illustrated in Figures \ref{fig:accLossEfficientnet01} and \ref{fig:accLossResNet01}. Although the training accuracy increased sharply and rapidly, the validation accuracy increased only slowly, and the loss function curves diverged rapidly. This suggests that the model memorized certain features of the FER-2013 dataset used for training, such as image noise or non-face-related features.
+\newline
+
+\section{Refined Implementation and Face Detection}
+
+Several changes were made to the architecture and pre-processing to prevent overfitting. These changes include:
+
+\begin{itemize}
+	\item To ensure that the models focused only on the important features, the Haar cascade classifier was used. The \verb|preprocess_dataset| function was created (Listing \ref{PreprocessingFunction}) to detect faces in each image and isolate the facial region. The faces were then scaled to a standardized size. The background information was irrelevant and was the likely main cause of the models’ overfitting.
+	\item The training pipeline was modified to increase the diversity of the dataset. The images were horizontally mirrored, rotated by up to 10 degrees and subjected to colour jitter. These transformations artificially expanded the dataset and forced the models to be invariant to small changes in head position.
+	\item The FER-2013 dataset contains several classes with a highly imbalanced number of images. The cross-entropy loss was calculated using the weights of the classes (Listing \ref{weights}).
+\end{itemize}
+
+\section{Training Strategy: Freezing and Scheduler}
+
+To fine-tune the model, the training strategy was divided into two stages. During the first 5 epochs, the pre-trained EfficientNet and ResNet backbones were “frozen,” meaning they were not updated during the training phase. Only the custom classification layers were updated. After this “warm-up phase,” the model’s backbones were “unfrozen,” and the model was trained in its entirety with a lower learning rate to refine the model’s feature extractors without compromising the pre-trained weights.
+In addition, a ReduceLROnPlateau scheduler was used for both EfficientNet and ResNet. This helped ensure that the model’s learning rate automatically decreased during the training phase as soon as the validation accuracy reached a plateau, allowing the model to converge more accurately to the global minimum of the loss function (Listing \ref{efficientNetModel}).
+\newline
+
+\section{Development of VGG16}
+
+The development process for the VGG16 model was similar, but it was used primarily for comparison. Unlike the PyTorch implementation of the ResNet and EfficientNet models, the VGG16 model was implemented sequentially. It uses a pre-trained VGG16 base model with a flattening layer and dense layers with high dropout values. This model helped to validate whether the extended scaling of EfficientNet or the residual blocks of the ResNet model offered an advantage over conventional deep CNN models for this facial expression recognition task.
+\newline
+
+\section{Final Training Parameters}
+
+The final models were trained with a batch size of 64 and the Adam optimiser. Due to the extensive face detection, strong augmentation and strategic removal of the layer restriction, there was a significant smoothing of the training curve and a reduction in the difference between the training and validation curves.
+\newline
+
+%========================================
+% CHAPTER 5: IMPLEMENTATION
+%========================================
+\chapter{Model Evaluation}
+
+To accurately assess the performance of the FER system, both qualitative and quantitative evaluations were carried out. Qualitatively, it was expected that the models would show a decreasing loss and increasing accuracy during training. Furthermore, there should be only minimal deviations between the training and test curves – a sign of good generalisation ability. To achieve this, accuracy and loss plots per epoch were generated for each model.
+Quantitatively, accuracy alone is not enough to evaluate the results. Therefore, the quantitative evaluation is based on the following criteria:
+
+\begin{itemize}
+	\item Confusion matrices (Appendix \ref{cm}) are used to determine which emotion classes are frequently confused by the models (e.g. ‘sadness’ and ‘neutral’).
+	\item Precision, recall and F1-score (Appendix \ref{cr}) are used to obtain a more detailed overview of the model’s performance per class and to ensure that minority classes such as ‘surprise’ are not neglected and that the model does not simply predict the majority class ‘happy’.
+\end{itemize}
+
+\section{Comparative Analysis: Pre vs. Post-Improvements}
+
+The evaluation began with an analysis of the impact of the improvements described in the development section.
+
+\begin{itemize}
+	\item Before implementing the improvements, the EfficientNet-B0 model showed clear signs of overfitting. It was found that the model’s training accuracy was close to 100\%, while the test accuracy remained at 65\%. The loss plot revealed a clear difference in the loss curve. Whilst the test loss increased, the training loss decreased continuously(Fig. \ref{fig:accLossEfficientnet01}). After implementing face detection and augmentation, the accuracy and loss curves converged significantly (Fig. \ref{fig:accLossEfficientnet02}). Ultimately, the accuracy of EfficientNet on the FER-2013 dataset was 0.59 (Fig. \ref{fig:accLossEfficientnet02}).
+	\item Similarly, the ResNet18 model exhibited extreme overfitting in its ‘pre-improvement state’ (Fig. \ref{fig:accLossResNet01}). After implementing the improvements, the model showed better performance in terms of convergence (Fig. \ref{fig:accLossResNet02}). Finally, the ResNet18 model outperformed EfficientNet on the FER-2013 dataset with an accuracy of 0.65.
+	\item As a baseline model, the VGG16 model achieved an accuracy of 0.48 (Fig. \ref{fig:accLossVGG16}). The confusion matrix revealed that the model performed very poorly on the ‘Angry’ and ‘Fear’ classes, frequently misclassifying them as ‘Happy’ or ‘Sad’ (Fig. \ref{fig:cm_vgg16}).
+\end{itemize}
+
+\section{Cross-Dataset Validation}
+
+The models were tested using the CK+ and JAFFE datasets to assess their practical applicability.
+
+\begin{itemize}
+	\item \textbf{Results from the CK+ dataset}:  EfficientNet (Fig. \ref{fig:subim3}) and VGG16 (Fig. \ref{fig:subim91}) achieved an accuracy of 0.73, whilst ResNet18 (Fig. \ref{fig:subim7}) achieved an accuracy of 0.72. The confusion matrices for EfficientNet and ResNet show excellent recall for the expressions ‘surprise’ and ‘joy’ (Fig. \ref{fig:cm_efficientnet_ck} \& \ref{fig:cm_resnet_ck}). The confusion matrix for VGG16 (Fig. \ref{fig:cm_vgg16_ck}), on the other hand, shows that the model has massive problems with this dataset – almost all emotions were classified as ‘angry’.
+	\item \textbf{Results from the JAFFE dataset}: This dataset was more challenging. EfficientNet (Fig. \ref{fig:subim4}) achieved an accuracy of 0.47, ResNet18 (Fig. \ref{fig:subim8}) an accuracy of 0.53, and VGG16 (Fig. \ref{fig:subim92}) achieved only 0.18. Most errors were caused by the classification of “Neutral” as “Sadness” and “Fear”, which could be due to ethnically-based differences in facial features that were not present in the FER-2013 training dataset.
+\end{itemize}
+
+\section{Qualitative Failure Modes and Visualizations}
+
+The models were also tested for quality using sample images from the CK+ dataset. As shown in the figures in Appendix \ref{predictions}, the system correctly classifies various emotional expressions as follows:
+
+\begin{itemize}
+	\item \textbf{Happy}: Correctly predicted by ResNet18 with a confidence level of 0.9\% (Fig. \ref{fig:predictions_resnet_03}) and EfficientNet with a confidence of 0.8\% (Fig. \ref{fig:predictions_efficientnet_03}).
+	\item \textbf{Neutral}: Correctly predicted by ResNet18 with a confidence of 0.6\% (Fig. \ref{fig:predictions_resnet_04}) and EfficientNet with a confidence of 0.5\% (Fig. \ref{fig:predictions_efficientnet_04}).
+	\item \textbf{Surprised}: Correctly predicted by all models, including VGG16 with a confidence of 97.9\% (Fig. \ref{fig:predictions_efficientnet_06} \& \ref{fig:predictions_resnet_06} \& \ref{fig:predictions_VGG16_06}).
+\end{itemize}
+
+However, the models also showed common error patterns. For example, the EfficientNet model predicted the ‘angry’ face as ‘sadness’ (Fig. \ref{fig:predictions_efficientnet_01}). This could be due to the fact that the two emotional expressions share a common feature, namely that the facial muscles are directed downwards. The ResNet18 model showed another error pattern when it predicted “sadness” as “neutral” (Fig. \ref{fig:predictions_resnet_05}). This highlights the model’s difficulties in recognizing subtle facial expressions. VGG16 predicted almost all emotions as “surprised” (Fig. \ref{fig:predictions_VGG16_01}-\ref{fig:predictions_VGG16_06}), which further highlights the need for improvements to this model.
+\newline
+
+%========================================
+% CHAPTER 6: EVALUATION, DISCUSSION AND CONCLUSIONS
+%========================================
+\chapter{Conclusion}
+
+As part of this project, a system for the recognition of facial expressions was developed. A comparative analysis of the EfficientNet-B0, ResNet18, and VGG16 architectures was conducted. Through a series of optimizations (hair cascade detection, data augmentation, and targeted layer freezing), we succeeded in improving the stability and generalization ability of the classification. The ResNet18 architecture proved to be the most powerful. With this model, an accuracy of 65\% was achieved on the FER-2013 dataset. At the same time, it showed good results on the CK+ dataset.
+
+However, it was not possible to achieve all of this without encountering certain technical limitations. The laptop with a GTX 1080 graphics card was not sufficient to take the project to a higher level. A more powerful environment would have allowed for more training epochs and more in-depth optimization of the hyperparameters. This would have benefited the EfficientNet and ResNet models in particular. Nevertheless, it was demonstrated that, in addition to choosing the right model architecture, the dataset used for classification and the preprocessing of the images are the primary factors determining a system’s success.
+
+\textbf{Link to the code:}
+
+https://github.com/sargoschh/UCLan\_ArtificialIntelligence/blob/main/Assignment1/Assign
+ment\_PredictionWithStacking.ipynb
+\newline

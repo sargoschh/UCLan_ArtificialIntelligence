@@ -1,0 +1,48 @@
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {B.1}{\ignorespaces Accuracy and Loss Graph - EfficientNet-B0 - pre-improvements}}{12}{figure.caption.2}%
+\contentsline {figure}{\numberline {B.2}{\ignorespaces Accuracy and Loss Graph - EfficientNet-B0 - post-improvements}}{12}{figure.caption.3}%
+\contentsline {figure}{\numberline {B.3}{\ignorespaces Accuracy and Loss Graph - ResNet18 - pre-improvements}}{13}{figure.caption.4}%
+\contentsline {figure}{\numberline {B.4}{\ignorespaces Accuracy and Loss Graph - ResNet18 - post-improvements}}{13}{figure.caption.5}%
+\contentsline {figure}{\numberline {B.5}{\ignorespaces Accuracy and Loss Graph - VGG16}}{13}{figure.caption.6}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {C.1}{\ignorespaces Confusion Matrix - EfficientNet-B0 - pre-improvements}}{14}{figure.caption.7}%
+\contentsline {figure}{\numberline {C.2}{\ignorespaces Confusion Matrix - EfficientNet-B0 - post-improvements}}{15}{figure.caption.8}%
+\contentsline {figure}{\numberline {C.3}{\ignorespaces Confusion Matrix - EfficientNet-B0 - CK+ Dataset}}{16}{figure.caption.9}%
+\contentsline {figure}{\numberline {C.4}{\ignorespaces Confusion Matrix - EfficientNet-B0 - JAFFE Dataset}}{17}{figure.caption.10}%
+\contentsline {figure}{\numberline {C.5}{\ignorespaces Confusion Matrix - ResNet18 - pre-improvements}}{18}{figure.caption.11}%
+\contentsline {figure}{\numberline {C.6}{\ignorespaces Confusion Matrix - ResNet18 - post-improvements}}{19}{figure.caption.12}%
+\contentsline {figure}{\numberline {C.7}{\ignorespaces Confusion Matrix - ResNet18 - CK+ Dataset}}{20}{figure.caption.13}%
+\contentsline {figure}{\numberline {C.8}{\ignorespaces Confusion Matrix - ResNet18 - JAFFE Dataset}}{21}{figure.caption.14}%
+\contentsline {figure}{\numberline {C.9}{\ignorespaces Confusion Matrix - VGG16}}{22}{figure.caption.15}%
+\contentsline {figure}{\numberline {C.10}{\ignorespaces Confusion Matrix - VGG16 - CK+ Dataset}}{23}{figure.caption.16}%
+\contentsline {figure}{\numberline {C.11}{\ignorespaces Confusion Matrix - VGG16 - JAFFE Dataset}}{24}{figure.caption.17}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {D.1}{\ignorespaces Classification Reports for EfficientNet-B0 Model}}{25}{figure.caption.18}%
+\contentsline {figure}{\numberline {D.2}{\ignorespaces Classification Reports for ResNet-18 Model}}{26}{figure.caption.19}%
+\contentsline {figure}{\numberline {D.3}{\ignorespaces Classification Reports for VGG16 Model}}{26}{figure.caption.20}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {E.1}{\ignorespaces Prediction - EfficientNet-B0 - Emotion: "Angry", Predicted: "Sadness"}}{27}{figure.caption.21}%
+\contentsline {figure}{\numberline {E.2}{\ignorespaces Prediction - EfficientNet-B0 - Emotion: "Fear", Predicted: "Sadness"}}{27}{figure.caption.22}%
+\contentsline {figure}{\numberline {E.3}{\ignorespaces Prediction - EfficientNet-B0 - Emotion: "Happy", Predicted: "Neutral"}}{28}{figure.caption.23}%
+\contentsline {figure}{\numberline {E.4}{\ignorespaces Prediction - EfficientNet-B0 - Emotion: "Neutral", Predicted: "Neutral"}}{28}{figure.caption.24}%
+\contentsline {figure}{\numberline {E.5}{\ignorespaces Prediction - EfficientNet-B0 - Emotion: "Sadness", Predicted: "Sadness"}}{28}{figure.caption.25}%
+\contentsline {figure}{\numberline {E.6}{\ignorespaces Prediction - EfficientNet-B0 - Emotion: "Surprise", Predicted: "Surprise"}}{29}{figure.caption.26}%
+\contentsline {figure}{\numberline {E.7}{\ignorespaces Prediction - ResNet18 - Emotion: "Angry", Predicted: "Sadness"}}{29}{figure.caption.27}%
+\contentsline {figure}{\numberline {E.8}{\ignorespaces Prediction - ResNet18 - Emotion: "Fear", Predicted: "Fear"}}{29}{figure.caption.28}%
+\contentsline {figure}{\numberline {E.9}{\ignorespaces Prediction - ResNet18 - Emotion: "Happy", Predicted: "Happy"}}{30}{figure.caption.29}%
+\contentsline {figure}{\numberline {E.10}{\ignorespaces Prediction - ResNet18 - Emotion: "Neutral", Predicted: "Neutral"}}{30}{figure.caption.30}%
+\contentsline {figure}{\numberline {E.11}{\ignorespaces Prediction - ResNet18 - Emotion: "Sadness", Predicted: "Neutral"}}{30}{figure.caption.31}%
+\contentsline {figure}{\numberline {E.12}{\ignorespaces Prediction - ResNet18 - Emotion: "Surprise", Predicted: "Surprise"}}{31}{figure.caption.32}%
+\contentsline {figure}{\numberline {E.13}{\ignorespaces Prediction - VGG16 - Emotion: "Angry", Predicted: "Neutral"}}{31}{figure.caption.33}%
+\contentsline {figure}{\numberline {E.14}{\ignorespaces Prediction - VGG16 - Emotion: "Fear", Predicted: "Surprise"}}{31}{figure.caption.34}%
+\contentsline {figure}{\numberline {E.15}{\ignorespaces Prediction - VGG16 - Emotion: "Happy", Predicted: "Surprise"}}{32}{figure.caption.35}%
+\contentsline {figure}{\numberline {E.16}{\ignorespaces Prediction - VGG16 - Emotion: "Neutral", Predicted: "Surprise"}}{32}{figure.caption.36}%
+\contentsline {figure}{\numberline {E.17}{\ignorespaces Prediction - VGG16 - Emotion: "Sadness", Predicted: "Surprise"}}{32}{figure.caption.37}%
+\contentsline {figure}{\numberline {E.18}{\ignorespaces Prediction - VGG16 - Emotion: "Surprise", Predicted: "Surprise"}}{33}{figure.caption.38}%

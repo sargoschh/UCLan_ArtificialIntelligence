@@ -1,0 +1,56 @@
+\begin{thebibliography}{xx}
+
+\harvarditem[Agung et~al.]{Agung, Rifai \harvardand\
+  Wijayanto}{2024}{Agung2024}
+Agung, E.~S., Rifai, A.~P. \harvardand\ Wijayanto, T.  \harvardyearleft
+  2024\harvardyearright , `Image-based facial emotion recognition using
+  convolutional neural network on emognition dataset', {\em Scientific Reports
+  2024 14:1} {\bf 14},~14429--.
+\newline\harvardurl{https://www.nature.com/articles/s41598-024-65276-x}
+
+\harvarditem[Akhand et~al.]{Akhand, Roy, Siddique, Kamal \harvardand\
+  Shimamura}{2021}{Akhand2021}
+Akhand, M.~A., Roy, S., Siddique, N., Kamal, M.~A. \harvardand\ Shimamura, T.
+  \harvardyearleft 2021\harvardyearright , `Facial emotion recognition using
+  transfer learning in the deep cnn', {\em Electronics 2021, Vol. 10,} {\bf
+  10}.
+\newline\harvardurl{https://www.mdpi.com/2079-9292/10/9/1036}
+
+\harvarditem[Dong et~al.]{Dong, Wang \harvardand\ Hang}{2021}{Dong2021}
+Dong, C., Wang, R. \harvardand\ Hang, Y.  \harvardyearleft
+  2021\harvardyearright , `Facial expression recognition based on improved vgg
+  convolutional neural network', {\em Journal of Physics: Conference Series}
+  {\bf 2083}.
+\newline\harvardurl{https://www.researchgate.net/publication/356740314\_Facial\_expression\_recognition\_
+  based\_on\_improved\_VGG\_convolutional\_neural\_network}
+
+\harvarditem{Gautam \harvardand\ Seeja}{2023}{Gautam2023}
+Gautam, C. \harvardand\ Seeja, K.~R.  \harvardyearleft 2023\harvardyearright ,
+  `Facial emotion recognition using handcrafted features and cnn', {\em
+  Procedia Computer Science} {\bf 218},~1295--1303.
+\newline\harvardurl{https://www.sciencedirect.com/science/article/pii/S1877050923001084}
+
+\harvarditem{Paikar}{2023}{DeepaPaikar2023}
+Paikar, D.  \harvardyearleft 2023\harvardyearright , `A comparative analysis of
+  deep learning models for facial expression recognition'.
+\newline\harvardurl{https://www.researchgate.net/publication/370729499\_A\_Comparative\_Analysis\_of\_
+  Deep\_Learning\_Models\_for\_Facial\_Expression\_Recognition}
+
+\harvarditem[Sankaradass et~al.]{Sankaradass, Chorko, Akshaya \harvardand\
+  Ramamoorthy}{2024}{Sankaradass2024}
+Sankaradass, V., Chorko, C., Akshaya, A. \harvardand\ Ramamoorthy, R.
+  \harvardyearleft 2024\harvardyearright , `Facial emotion classification
+  utilizing efficientnet: A comprehensive deep learning method', {\em 2024
+  International Conference on Smart Technologies for Sustainable Development
+  Goals, ICSTSDG 2024} .
+\newline\harvardurl{https://ieeexplore.ieee.org/document/11026468}
+
+\harvarditem[Singh et~al.]{Singh, Saurav, Kumar, Saini, Vohra \harvardand\
+  Singh}{2023}{Singh2023}
+Singh, R., Saurav, S., Kumar, T., Saini, R., Vohra, A. \harvardand\ Singh, S.
+  \harvardyearleft 2023\harvardyearright , `Facial expression recognition in
+  videos using hybrid cnn \& convlstm', {\em International Journal of
+  Information Technology 2023 15:4} {\bf 15},~1819--1830.
+\newline\harvardurl{https://link.springer.com/article/10.1007/s41870-023-01183-0}
+
+\end{thebibliography}
